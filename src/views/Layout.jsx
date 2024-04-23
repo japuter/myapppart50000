@@ -12,7 +12,7 @@ const Layout = () => (
     <main>
       <Outlet />
     </main>
-    <footer className="m-12 text-xl">Copyright 2024</footer>
+    <footer className="m-12 text-xl">Copyright 22222</footer>
   </div>
 );
 

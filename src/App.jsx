@@ -7,14 +7,16 @@ import Layout from './views/Layout';
 import Single from './views/Single';
 
 const App = () => {
+  const basename = import.meta.env.BASE_URL; // Fetching BASE_URL from environment variables
+
   return (
-    <Router>
+    <Router basename={basename}>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/upload" element={<Upload />} />
-          <Route path="/media/:id" element={<Single />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="upload" element={<Upload />} />
+          <Route path="media/:id" element={<Single />} />
         </Route>
       </Routes>
     </Router>
