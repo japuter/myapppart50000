@@ -7,18 +7,24 @@ const Home = () => {
 
   const getMedia = async () => {
     try {
-      const json = await fetchData('test.json');
-      setMediaArray(json);
+      const json = await fetchData(import.meta.env.VITE_MEDIA_API + '/media');
+      const mediaWithUser = await Promise.all(
+        json.map(async (mediaItem) => {
+          const userResult = await fetchData(
+            import.meta.env.VITE_AUTH_API + '/users/' + mediaItem.user_id,
+          );
+          return {...mediaItem, username: userResult.username};
+        }),
+      );
+      setMediaArray(mediaWithUser);
     } catch (e) {
-      console.log(e); // Logs the error to the console if fetchData fails
+      console.log(e);
     }
   };
 
   useEffect(() => {
-    getMedia(); // Calls getMedia when the component mounts
-  }, []); // Dependency array to run the effect once on component mount
-
-  console.log(mediaArray);
+    getMedia();
+  }, []);
 
   return (
     <>
